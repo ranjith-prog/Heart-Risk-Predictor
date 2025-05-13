@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Heart Disease Prediction</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .form-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+    }
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    h2 {
+      text-align: center;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+<div class="form-container">
+  <h1>Heart Disease Prediction</h1>
+  <form method="POST">
+    <!-- Explicitly adding age field -->
+    <label for="age">Age:</label>
+    <input type="text" id="age" name="age" required />
+
+    <!-- Loop through other fields -->
+    {% for field in ['sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal'] %}
+      <label for="{{ field }}">{{ field.capitalize() }}:</label>
+      <input type="text" id="{{ field }}" name="{{ field }}" required />
+    {% endfor %}
+    
+    <button type="submit">Predict</button>
+  </form>
+  {% if result %}
+    <h2>{{ result }}</h2>
+  {% endif %}
+</div>
+</body>
+</html>
