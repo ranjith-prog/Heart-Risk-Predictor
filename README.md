@@ -31,14 +31,15 @@ Heart Risk Perdictor is a deep learning-based project that analyzes patient heal
    git clone https://github.com/your-username/heart-disease-predictor.git
    cd heart-disease-predictor
 2. ** For creating virtual Environment**
-    python -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
-    pip install -r requirements.txt
+   
+       python -m venv venv
+       source venv/bin/activate  # On Windows: venv\Scripts\activate
+       pip install -r requirements.txt
 
-3. ** Running training Script**
+4. ** Running training Script**
 
        python src/train_model.py
 
-4. **Deploy the Model**
+5. **Deploy the Model**
 
        python app.py
