@@ -35,8 +35,10 @@ Heart Risk Perdictor is a deep learning-based project that analyzes patient heal
     source venv/bin/activate  # On Windows: venv\Scripts\activate
     pip install -r requirements.txt
 
-3.** Running training Script**
-    python src/train_model.py
+3. ** Running training Script**
 
-4.**Deploy the Model**
-    python app.py
+       python src/train_model.py
+
+4. **Deploy the Model**
+
+       python app.py
