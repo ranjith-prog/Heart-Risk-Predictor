@@ -4,70 +4,171 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Heart Disease Prediction</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Heart_anterior_exterior_view.svg/1024px-Heart_anterior_exterior_view.svg.png') no-repeat center center fixed;
+      background-size: cover;
+      background-blend-mode: darken;
+      background-color: rgba(139, 0, 0, 0.85);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .form-container {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      max-width: 400px;
-      width: 100%;
-    }
-    h1 {
-      text-align: center;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-    }
-    input {
-      width: 100%;
-      padding: 8px;
-      margin-top: 4px;
-    }
-    button {
-      margin-top: 15px;
-      width: 100%;
-      padding: 10px;
-      background-color: #007BFF;
       color: white;
-      border: none;
-      border-radius: 5px;
     }
-    h2 {
+
+    .card {
+      width: 100%;
+      max-width: 750px;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+    }
+
+    .form-control {
+      border-radius: 10px;
+    }
+
+    .btn-primary {
+      border-radius: 10px;
+      background-color: #dc3545;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #c82333;
+    }
+
+    .form-label {
+      font-weight: 500;
+    }
+
+    .result-message {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
       text-align: center;
-      color: green;
+    }
+
+    .heart {
+      width: 100px;
+      height: 90px;
+      background: red;
+      position: relative;
+      margin: 30px auto;
+      transform: rotate(-45deg);
+      animation: beat 1s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 100px;
+      height: 90px;
+      background: red;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -50px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 50px;
+      top: 0;
+    }
+
+    @keyframes beat {
+      0%, 100% {
+        transform: scale(1) rotate(-45deg);
+      }
+      50% {
+        transform: scale(1.2) rotate(-45deg);
+      }
+    }
+
+    .heart.normal {
+      animation-duration: 1s;
+    }
+
+    .heart.fast {
+      animation-duration: 0.4s;
     }
   </style>
 </head>
 <body>
-<div class="form-container">
-  <h1>Heart Disease Prediction</h1>
-  <form method="POST">
-    <!-- Explicitly adding age field -->
-    <label for="age">Age:</label>
-    <input type="text" id="age" name="age" required />
+  <div class="card">
+    <h2 class="text-center mb-4">Heart Disease Predictor</h2>
+    <form method="POST">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="age" class="form-label">Age (years)</label>
+          <input type="text" class="form-control" id="age" name="age" required>
+        </div>
+        <div class="col-md-6">
+          <label for="sex" class="form-label">Sex (0 = Female, 1 = Male)</label>
+          <input type="text" class="form-control" id="sex" name="sex" required>
+        </div>
+        <div class="col-md-6">
+          <label for="cp" class="form-label">Chest Pain Type (0–3)</label>
+          <input type="text" class="form-control" id="cp" name="cp" required>
+        </div>
+        <div class="col-md-6">
+          <label for="trestbps" class="form-label">Resting Blood Pressure (mm Hg)</label>
+          <input type="text" class="form-control" id="trestbps" name="trestbps" required>
+        </div>
+        <div class="col-md-6">
+          <label for="chol" class="form-label">Serum Cholesterol (mg/dl)</label>
+          <input type="text" class="form-control" id="chol" name="chol" required>
+        </div>
+        <div class="col-md-6">
+          <label for="fbs" class="form-label">Fasting Blood Sugar > 120 mg/dl (1 = Yes, 0 = No)</label>
+          <input type="text" class="form-control" id="fbs" name="fbs" required>
+        </div>
+        <div class="col-md-6">
+          <label for="restecg" class="form-label">Resting ECG (0–2)</label>
+          <input type="text" class="form-control" id="restecg" name="restecg" required>
+        </div>
+        <div class="col-md-6">
+          <label for="thalach" class="form-label">Max Heart Rate Achieved</label>
+          <input type="text" class="form-control" id="thalach" name="thalach" required>
+        </div>
+        <div class="col-md-6">
+          <label for="exang" class="form-label">Exercise Induced Angina (1 = Yes, 0 = No)</label>
+          <input type="text" class="form-control" id="exang" name="exang" required>
+        </div>
+        <div class="col-md-6">
+          <label for="oldpeak" class="form-label">ST Depression Induced by Exercise</label>
+          <input type="text" class="form-control" id="oldpeak" name="oldpeak" required>
+        </div>
+        <div class="col-md-6">
+          <label for="slope" class="form-label">Slope of Peak Exercise ST Segment (0–2)</label>
+          <input type="text" class="form-control" id="slope" name="slope" required>
+        </div>
+        <div class="col-md-6">
+          <label for="ca" class="form-label">Number of Major Vessels Colored by Fluoroscopy (0–3)</label>
+          <input type="text" class="form-control" id="ca" name="ca" required>
+        </div>
+        <div class="col-md-12">
+          <label for="thal" class="form-label">Thalassemia (1 = Fixed Defect, 2 = Normal, 3 = Reversible Defect)</label>
+          <input type="text" class="form-control" id="thal" name="thal" required>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mt-4 w-100">Predict</button>
+    </form>
 
-    <!-- Loop through other fields -->
-    {% for field in ['sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal'] %}
-      <label for="{{ field }}">{{ field.capitalize() }}:</label>
-      <input type="text" id="{{ field }}" name="{{ field }}" required />
-    {% endfor %}
-    
-    <button type="submit">Predict</button>
-  </form>
-  {% if result %}
-    <h2>{{ result }}</h2>
-  {% endif %}
-</div>
+    {% if result %}
+    <div class="result-message mt-4 text-{{ 'danger' if 'High' in result else 'success' }}">
+      {{ result }}
+    </div>
+    <div class="heart {{ 'fast' if 'High' in result else 'normal' }}"></div>
+    {% endif %}
+  </div>
 </body>
 </html>
